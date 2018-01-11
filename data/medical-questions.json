@@ -1,0 +1,79 @@
+{
+    "questions" : [
+        {
+            "name" : "pregnantOrBreast",
+            "text" : "Are you pregnant or breastfeeding?",
+            "provideDetails" : ""
+        },
+        {
+            "name" : "allergyOrAnaphylaxis",
+            "text" : "Do you have a history of severe allergy/anaphylaxis?",
+            "provideDetails" : ""
+        },
+        {
+            "name" : "currentMedicalTreatments",
+            "text" : "Are you currently receiving any medical treatment?",
+            "provideDetails" : "Please provide more details:"
+        },
+        {
+            "name" : "previousAestheticTreatments",
+            "text" : "Have you previously received any aesthetic treatments (ex. laser, peels, dermabrasion, etc.)",
+            "provideDetails" : "Please provide more details:"
+        },
+        {
+            "name" : "previousFillerTreatments",
+            "text" : "Have you had any treatment with dermal fillers?",
+            "provideDetails" : "Which treatment did you receive, what areas were treated and when?"
+        },
+        {
+            "name" : "relatedSideEffects",
+            "text" : "Did you experience any side effects related to the treatment?",
+            "provideDetails" : "Please provide more details:"
+        },
+        {
+            "name" : "autoImmuneDisease",
+            "text" : "Have you ever suffered from auto-immune disease or disease affecting the immune system?",
+            "provideDetails" : ""
+        },
+        {
+            "name" : "cutaneousInfectionInflammation",
+            "text" : "Do you have any cutaneous (skin) infection or inflammatory problems (ex. herpes, acne, etc.)?",
+            "provideDetails" : ""
+        },
+        {
+            "name" : "currentInhibitorDrugs",
+            "text" : "Are you currently taking any steroids, aspirin, anticoagulant (ex. warfarin) or certain drugs that reduce or inhibit the hepatic metabolism?",
+            "provideDetails" : ""
+        },
+        {
+            "name" : "rheumaticFeverSoreThroat",
+            "text" : "Do you suffer from acute rheumatic fever or recurrent sore throat?",
+            "provideDetails" : ""
+        },
+        {
+            "name" : "hyaluronicAcidAllergy",
+            "text" : "Do you suffer from any allergies, in particular to hyaluronic acid, amide type local anaesthetics or lidocaine?",
+            "provideDetails" : ""
+        },
+        {
+            "name" : "untreatedEpilepsy",
+            "text" : "Do you suffer from untreated epilepsy?",
+            "provideDetails" : ""
+        },
+        {
+            "name" : "hypertrophicScarring",
+            "text" : "Do you tend to develop hypertrophic scarring?",
+            "provideDetails" : ""
+        },
+        {
+            "name" : "porphyria",
+            "text" : "Do you suffer from porphyria?",
+            "provideDetails" : ""
+        },
+        {
+            "name" : "cardiacConductionDisorders",
+            "text" : "Do you suffer from cardiac conduction disorders?",
+            "provideDetails" : "Please provide more details:"
+        }
+    ]
+}

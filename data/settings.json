@@ -1,0 +1,25 @@
+{
+    "settings" : [
+
+            {
+
+                "name" : "clientAreaPassword",
+                "descName" : "Client Area Password",
+                "fullDesc" : "Prevents leaving of the client area unless the password is entered.",
+                "optional" : true,
+                "value" : ""
+
+            },
+
+            {
+
+                "name" : "emails",
+                "descName" : "Optional Email Addresses",
+                "fullDesc" : "Add email addresses to automatically send generated forms to.",
+                "optional" : true,
+                "value" : ""
+
+            }
+
+    ]
+}

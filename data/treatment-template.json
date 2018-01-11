@@ -1,0 +1,11 @@
+{
+    "patientFolder" : "",
+    "signature-history" : "signature-history.png",
+    "signature-consent" : "signature-consent.png",
+    "speakToMedia" : false,
+    "scientificPhotoUsage" : false,
+    "mediaPhotoUsage" : false,
+
+    "questions" : []
+
+}

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
+        <meta name="format-detection" content="telephone=no">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+        <title>Intraline App</title>
+        <link rel="stylesheet" href="css/bootstrap.css"></link>
+        <link rel="stylesheet" href="css/intraline.css"></link>
+    </head>
+    <body>
+        <div class="container intraline-logo intraline-header">
+            <div class="row">
+                <div class="col-sm-2"></div>
+                <div class="text-center col-sm-8">
+                    <img class="img-fluid" src="img/logo-black.jpg" alt="Intraline">
+                </div>
+                <div class="col-sm-2"></div>
+            </div>
+        </div>
+
+        <div class="container intraline-content intraline-content-login">
+            <div class="row intraline-login">
+                <div class="col-sm-3"></div>
+                <form class="col-md-6">
+                    <div class="form-group"><input type="text" id="intraline-login-username" class="form-control" placeholder="username"></div>
+                    <div class="form-group"><input type="password" id="intraline-login-password" class="form-control" placeholder="password"></div>
+                    <div class="dropdown text-center form-group">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sign in
+                        </button>
+                        <div class="dropdown-menu">
+                            <h6 class="dropdown-header">Via:</h6>
+                            <a class="dropdown-item intraline-signin-option" data-option="fb">Facebook</a>
+                            <a class="dropdown-item intraline-signin-option" data-option="gg">Google</a>
+                            <a class="dropdown-item intraline-signin-option" data-option="ms">Microsoft</a>
+                        </div>
+                    </div>
+                </form>
+                <div class="col-sm-3"></div>
+            </div>
+        </div>
+
+        <div class="container intraline-content intraline-content-main">
+            <div class="row intraline-imagebutton">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-8 intraline-imagebutton-col intraline-hyperlink" data-href="form.html" style="background-color:rgba(204, 161, 152, 0.60)">
+                    <img class="intraline-imagebutton-image" src="img/caitlin.jpg" alt="Client Area">
+                    <div class="intraline-floating-text">Client</div>
+                </div>
+                <div class="col-sm-2"></div>
+            </div>
+            <div class="row intraline-imagebutton">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-8 intraline-imagebutton-col intraline-phaselink" data-href="intraline-content-archive" style="background-color:rgba(55, 81, 105, 0.60)">
+                    <img class="intraline-imagebutton-image" src="img/mum.jpg" alt="Archive">
+                    <div class="intraline-floating-text">Files</div>
+                </div>
+                <div class="col-sm-2"></div>
+            </div>
+            <div class="row intraline-imagebutton">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-8 intraline-imagebutton-col intraline-phaselink" data-href="intraline-load-settings" style="background-color:rgba(50, 50, 50, 0.60)">
+                    <img class="intraline-imagebutton-image" src="img/duck.jpg" alt="Settings">
+                    <div class="intraline-floating-text">Settings</div>
+                </div>
+                <div class="col-sm-2"></div>
+            </div>
+        </div>
+
+        <div class="container intraline-content intraline-content-archive">
+            <div id="intraline-archive-folders" class="row">
+                <form class="col">
+                    <div class="text-center intraline-form-sectionheadings">Archive</div>
+                    <div class="intraline-folder" >TEMPLATE</div>
+                    <div class="text-center intraline-form-sectionheadings intraline-phaselink" data-href="intraline-content-main">back</div>
+                </form>
+            </div>
+
+            <div id="intraline-archive-patient" class="container">
+                <div class="row">
+                    <form id="intraline-patient-editform">
+                        <div class="text-center intraline-form-sectionheadings">Patient Information</div>
+
+                        <div class="form-group form-row">
+                            <div class="col-6">
+                                <input name="fname" type="text" class="form-control" readonly placeholder="first">
+                            </div>
+                            <div class="col-6">
+                                <input name="lname" type="text" class="form-control" readonly placeholder="last">
+                            </div>
+                            <div class="col-12">
+                                <small class="form-text text-center text-muted">Patient Name</small>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <input name="dob" type="date" class="form-control" placeholder="1900-11-16">
+                            <small class="form-text text-center readonly text-muted">Date of Birth</small>
+                        </div>
+
+                        <div class="form-group">
+                            <input name="address" type="text" class="form-control" placeholder="123 Street, City">
+                            <small class="form-text text-center text-muted">Address</small>
+                        </div>
+
+                        <div class="form-group">
+                            <input name="email" type="email" class="form-control">
+                            <small class="form-text text-center text-muted">Email</small>
+                        </div>
+                        <div class="form-group">
+                            <input name="tel" type="tel" class="form-control">
+                            <small class="form-text text-center text-muted">Phone</small>
+                        </div>
+                        <div class="form-group">
+                            <ul id="intraline-patient-editform-treatments"class="list-group">
+                                <li class="text-center list-group-item">Treatments</li>
+                            </ul>
+                        </div>
+                        <div id="intraline-patient-editform-submit" class="text-center intraline-form-sectionheadings">back</div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="container intraline-content intraline-content-settings">
+            <div class="row">
+                <form id="intraline-settings" class="col-sm-12">
+                    <div class="text-center intraline-form-sectionheadings">Settings</div>
+
+                    <div  id="intraline-settings-template">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <input type="checkbox" class="intraline-settings-template-checkbox" aria-label="Yes">
+                                </span>
+                                <input type="text" class="form-control intraline-settings-template-text" aria-label="template">
+                            </div>
+                            <small class="form-text text-center text-muted intraline-settings-template-subheading">Email Address:</small>
+                        </div>
+
+                        <div class="collapse">
+                            <div class="card card-body">
+                            I would like to recieve a copy of this form via my above email address.
+                            </div>
+                        </div>
+                    </div>
+                    <div id="intraline-settings-submit" class="text-center intraline-form-sectionheadings" data-href="intraline-content-main">save changes</div>
+                </form>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="container intraline-footer">
+            <div class="row intraline-addvert">
+                <div class="col-sm-2"></div>
+                <div class="text-center col-sm-8">
+                    <img class="img-fluid" src="img/add.png" alt="Addvert">
+                </div>
+                <div class="col-sm-2"></div>
+            </div>
+        </div>
+
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/jquery-3.2.1.js"></script>
+        <script type="text/javascript" src="js/popper.js"></script>
+        <script type="text/javascript" src="js/bootstrap.js"></script>
+        <script type="text/javascript" src="js/util.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript" src="js/landing.js"></script>
+        <script type="text/javascript" src="js/treatment.js"></script>
+        <script type="text/javascript" src="js/patient.js"></script>
+    </body>
+</html>

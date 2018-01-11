@@ -1,0 +1,215 @@
+@font-face {
+  font-family: "baron-neue";
+  src: url("../assets/Baron Neue.otf");  // Give relative path to your css file.
+}
+
+@font-face {
+  font-family: "mont-reg";
+  src: url("../assets/Montserrat-Light.ttf");  // Give relative path to your css file.
+}
+
+@font-face {
+  font-family: "mont-thin";
+  src: url("../assets/Montserrat-Thin.ttf");  // Give relative path to your css file.
+}
+
+@font-face {
+  font-family: "mont-thin-ital";
+  src: url("../assets/Montserrat-ThinItalic.ttf");  // Give relative path to your css file.
+}
+
+body {
+    background-color: #ffffff !important;
+    font-family:"mont-thin" !important;
+    color:#4C4C4C;
+}
+
+.form-control, .input-group-addon {
+    background-color: unset;
+    border-top:none !important;
+    border-left:none !important;
+    border-right:none !important;
+    border-bottom: solid 1px #D8D8D8;
+    text-align: center;
+    font-style: italic;
+    border-radius: unset;
+    font-family: "mont-thin-ital";
+}
+
+.form-control:disabled, .form-control[readonly] {
+    background-color: #F7F7F7;
+}
+
+.form-control:focus{
+    border-bottom: solid 1px #7C7C7C;
+}
+
+.intraline-logo {
+
+    padding-top:3vh;
+    padding-bottom:5vh;
+    transition: padding-top 1s;
+}
+.intraline-logo img {max-height:3vh;}
+.intraline-landing-logo {
+    padding-top:30vh !important;
+    padding-bottom:10vh;
+    transition: padding-top 1s;
+}
+
+/** Section for the configuring the basic layout of the app **/
+.intraline-header, .intraline-footer {
+    height:12.5vh;
+}
+.intraline-footer {
+    max-height:12.5vh;
+    overflow:hidden;
+    display:none;
+    position:absolute;
+    bottom:0px;
+}
+.intraline-footer img {
+    max-height:12.5vh;
+}
+.intraline-content{
+    display:none;
+    height: 75vh;
+    overflow-y:auto;
+}
+
+.intraline-content-show{
+    
+}
+
+/** Section for the consent form styling **/
+
+.intraline-content-consentform {
+
+}
+
+.intraline-form-sectionheadings {
+    padding:4vh 0vh;
+    font-size:1.2em;
+}
+.intraline-section-buttons {
+    padding:2vh 0vw;
+}
+.intraline-content-consentform .card {
+    border-radius:unset;
+}
+
+.intraline-content-consentform .card-header {
+    background-color: #ffffff;
+}
+
+.intraline-content-consentform .card-header:first-child {
+    border-radius:unset;
+}
+
+.intraline-truefalse-row {
+    font-size:.8em;
+}
+.intraline-truefalse-row > div.intraline-truefalse-center {
+    display:flex;
+    align-items: center;
+}
+
+.intraline-truefalse-row input[type=radio]{
+    font-size: .6em !important;
+
+}
+.intraline-truefalse-expand {
+    margin-top:2vh;
+}
+.intraline-truefalse-expand input {
+    font-size:.8em;
+}
+
+.intraline-form-text {
+    padding: 0vh 2vw;
+    font-size:.9em;
+    font-family: "mont-reg";
+    text-align:justify;
+}
+
+/** Section for the archive **/
+
+.intraline-folder {
+    text-align: center;
+    border: solid 1px #7C7C7C;
+    background-color: #F7F7F7;
+    padding:2vh 0vh;
+    margin:1vh 0vw;
+}
+
+#intraline-archive-patient {
+    display:none;
+}
+
+/** Section for the floating text over images buttons **/
+.intraline-imagebutton:last-child { padding-bottom:0vh; }
+
+.intraline-floating-text {
+    font-family: baron-neue;
+    color: #ffffff;
+    line-height: 1 !important;
+    color:white;
+    position:absolute;
+    top:6vh;
+    font-size: 8vh;
+    text-align:center;
+    height:1px;
+    left:0;
+    right:0;
+    margin-left:auto;
+    margin-right:auto;
+    overflow: visible;
+}
+
+.intraline-imagebutton-image {
+    opacity:.5;
+    height:20vh;
+    position: absolute;
+    top: -9999px;
+    bottom: -9999px;
+    left: -9999px;
+    right: -9999px;
+    margin: auto;
+
+    /** Mostly for testing purposes **/
+    -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+    filter: grayscale(100%);
+}
+
+.intraline-imagebutton {
+    padding-bottom:5vh;
+    margin-right:15px;
+    margin-left:15px;
+}
+
+.intraline-imagebutton-col{
+    height:20vh;
+    text-align:center;
+    overflow: hidden;
+}
+
+/** Utilities **/
+
+.intraline-truefalse-row-template {
+    display:none;
+}
+
+.intraline-solidline {
+    height:1px;
+    width:100%;
+    margin:0px auto;
+    background-color:#7C7C7C;
+}
+
+.intraline-solidline-top {
+    bottom:0px;
+}
+
+.intraline-solidline-bottom {
+    top:0px;
+}

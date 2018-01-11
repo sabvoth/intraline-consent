@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
+        <meta name="format-detection" content="telephone=no">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+        <title>Intraline Consent Form</title>
+        <link rel="stylesheet" href="css/bootstrap.css"></link>
+        <link rel="stylesheet" href="css/intraline.css"></link>
+    </head>
+    <body>
+        <div class="container intraline-logo intraline-header">
+            <div class="row">
+                <div class="col-sm-2"></div>
+                <div class="text-center col-sm-8">
+                    <img class="img-fluid" src="img/logo-black.jpg" alt="Intraline">
+                </div>
+                <div class="col-sm-2"></div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-2"></div>
+                <div class="text-center col-sm-8">
+                    <div id="intraline-logo-subheading">Consent Form Collection</div>
+                </div>
+                <div class="col-sm-2"></div>
+            </div>
+        </div>
+
+        <div class="container intraline-content-consentform intraline-content" data-section="1">
+            <div class="row">
+                <form class="col-sm-12" id="intraline-form-basicinfo">
+                    <div class="text-center intraline-form-sectionheadings">Section 1: Basic Info</div>
+
+                    <div class="form-group form-row">
+                        <div class="col-6">
+                            <input type="text" name="fname" class="form-control" placeholder="first">
+                        </div>
+                        <div class="col-6">
+                            <input type="text" name="lname" class="form-control" placeholder="last">
+                        </div>
+                        <div class="col-12">
+                            <small class="form-text text-center text-muted">Patient Name</small>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="date" name="dateofbirth" class="form-control" placeholder="1900-11-16">
+                        <small class="form-text text-center text-muted">Date of Birth:</small>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" name="address" class="form-control" placeholder="26-27 Bedford Sq, London, UK, WC1B 3HP">
+                        <small class="form-text text-center text-muted">Address:</small>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="tel" name="tel" class="form-control" placeholder="+44 203 841 8001">
+                        <small class="form-text text-center text-muted">Phone:</small>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <input type="checkbox" name="emailconsent" aria-label="I agree" data-toggle="collapse" href="#emailAgreement" aria-expanded="false" aria-controls="emailAgreement" value="true">
+                            </span>
+                            <input id="intraline-form-emailAddress" name="email" type="text" class="form-control" aria-label="email address">
+                        </div>
+                        <small class="form-text text-center text-muted">Email Address:</small>
+                    </div>
+
+                    <div class="collapse" id="emailAgreement">
+                        <div class="card card-body">
+                        I would like to recieve a copy of this form via my above email address.
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="row intraline-section-buttons">
+                <div class="col-2 intraline-section-back"> </div>
+                <div class="col-8"> </div>
+                <div class="col-2 intraline-section-next">next</div>
+            </div>
+
+        </div>
+
+        <div class="container intraline-content-consentform intraline-content" data-section="2">
+
+            <div class="row">
+                <form id="intraline-medical-history" class="col-sm-12">
+                    <div class="text-center intraline-form-sectionheadings">Section 2: Medical History</div>
+
+                    <div class="form-group intraline-form-text">
+                        <small class="form-text">Please complete the following medical questionnaire:</small>
+                    </div>
+
+                    <div class="intraline-truefalse-row intraline-truefalse-row-template form-group form-row">
+                        <div class="col-9 intraline-truefalse-center intraline-truefalse-question">
+                            Template
+                        </div>
+
+                        <div class="col-3 intraline-truefalse-center">
+                            <div class="btn-group" data-toggle="buttons">
+                                <label class="btn btn-secondary intraline-truefalse-trueoption" >
+                                    <input type="radio" name="options" autocomplete="off" >Y
+                                </label>
+                                <label class="btn btn-secondary intraline-truefalse-falseoption">
+                                    <input type="radio" name="options" autocomplete="off">N
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="collapse col intraline-truefalse-expand">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class='form-group'>
+                                        <input class='form-control' type='text' placeholder='No Details Required'>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="row intraline-section-buttons">
+                <div class="col-2 intraline-section-back">back</div>
+                <div class="col-8"> </div>
+                <div class="col-2 intraline-section-next">next</div>
+            </div>
+
+        </div>
+
+        <div class="container intraline-content-consentform intraline-content" data-section="3">
+
+            <div class="row">
+                <form id="intraline-patient-consent" class="col-sm-12">
+                    <div class="text-center intraline-form-sectionheadings">Section 3: Patient Consent</div>
+
+                    <div class="form-group intraline-form-text">Intraline’s Dermal Fillers are made from sterile and transparent gel based cross-linked non-animal synthetic
+                        hyaluronic acid. Hyaluronic acid is a natural substance present in the human body. The cross-linked hyaluronic
+                        acid in Intraline mimics the natural hyaluronic acid already present in the human body.
+                    </div>
+                    <div class="form-group intraline-form-text">Intraline’s Dermal Fillers utilize an innovative spherification technology, which smoothes Hyaluronic Acids’
+                        traditionally angular rhomboid molecular structure, leading to smoother, more natural results, which can last
+                        6 –12 months.
+                    </div>
+
+
+                    <div class="form-group">
+                        <button class="btn btn-secondary btn-block intraline-section-next" type="button">I understand.</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="row intraline-section-buttons">
+                <div class="col-2 intraline-section-back">back</div>
+                <div class="col-8"> </div>
+                <div class="col-2 intraline-section-next"> </div>
+            </div>
+        </div>
+
+        <div class="container intraline-content-consentform intraline-content" data-section="4">
+
+            <div class="row">
+                <form id="intraline-patient-consent" class="col-sm-12">
+                    <div class="text-center intraline-form-sectionheadings">Section 3: Patient Consent</div>
+
+                    <div class="form-group intraline-form-text">However, it is important to emphasize that the effect is very individual and can vary depending on the skin
+                        type, age*, treated area and possible previous treatments in the same area. A follow-up of the treatment can
+                        contribute to prolonging the effect of the initial treatment.
+                    </div>
+                    <div class="form-group intraline-form-text">Although hyaluronic acid is a natural component of the (skin) dermis, its injection may in very rare cases
+                        provoke undesired reactions such as hematoma, necrosis, pigmentation and granuloma. After a treatment
+                        with Intraline, certain reactions of short duration can occur. Common and expected reactions are skin redness,
+                        tenderness and swelling or pain in the treated area. These inconveniences may last from one hour up to a
+                        week. After treatment the patient should avoid strenuous exercise and protect the treated area from intense
+                        sunlight and extreme temperatures.
+                    </div>
+
+                    <div class="form-group">
+                        <button class="btn btn-secondary btn-block intraline-section-next" type="button">I understand.</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="row intraline-section-buttons">
+                <div class="col-2 intraline-section-back">back</div>
+                <div class="col-8"> </div>
+                <div class="col-2 intraline-section-next"> </div>
+            </div>
+        </div>
+
+        <div class="container intraline-content-consentform intraline-content" data-section="5">
+
+            <div class="row">
+                <form id="intraline-patient-consent" class="col-sm-12">
+                    <div class="text-center intraline-form-sectionheadings">Section 3: Patient Consent</div>
+
+                    <div class="form-group intraline-form-text">I hereby acknowledge that the practitioner performing the treatment has in a satisfactory way informed me
+                        about the characteristics and usage of Intraline. The practitioner has thoroughly described the reactions that
+                        can occur after treatment and informed me on how to care for the treated area after performed injection.
+                    </div>
+                    <div class="form-group intraline-form-text">
+                        By signing this document I confirm that I have answered the questions from the practitioner regarding my
+                        medical history in an honest way. I have also informed the practitioner about possible allergies and previous
+                        treatments in the same area. My signature confirms that I agree to treatment with Intraline.
+                    </div>
+
+                    <div class="form-group">
+                        <div class="form-group form-row">
+                            <div class="col-6">
+                                <input type="text" class="form-control">
+                            </div>
+                            <div class="col-6">
+                                <input type="date" class="form-control">
+                            </div>
+                            <div class="col-6">
+                                <small class="form-text text-center text-muted">Signature of Patient</small>
+                            </div>
+                            <div class="col-6">
+                                <small class="form-text text-center text-muted">Date</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-secondary btn-block intraline-section-next" type="button">Accept</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="row intraline-section-buttons">
+                <div class="col-2 intraline-section-back">back</div>
+                <div class="col-8"> </div>
+                <div class="col-2 intraline-section-next"> </div>
+            </div>
+        </div>
+
+        <div class="container intraline-content-consentform intraline-content" data-section="6">
+
+            <div class="row">
+                <form id="intraline-patient-consent" class="col-sm-12">
+                    <div class="text-center intraline-form-sectionheadings">Section 4: On a Voluntarily Undertaken Basis</div>
+
+                    <div class="form-group intraline-form-text">
+                        I am interested in speaking to the media about my experience with Intraline and my medical practitoner can provide more information about this.
+                    </div>
+
+                    <div class="intraline-truefalse-row form-group form-row">
+                        <div class="col-2"> </div>
+                        <div class="col-8 text-center">
+                            <div id="speakToMedia" class="btn-group" data-toggle="buttons">
+                                <label class="btn btn-secondary" >
+                                    <input type="radio" name="speakToMedia" value="true" autocomplete="off" >I agree
+                                </label>
+                                <label class="btn btn-secondary">
+                                    <input type="radio" name="speakToMedia" value="false" autocomplete="off">I disagree
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-2"> </div>
+                    </div>
+                    <div class="form-group intraline-form-text">
+                        My medical practitoner may use photos taken before and after my treatment for the following purposes. I have seen these photos and agree or disagree with their use as follows.
+                    </div>
+
+                    <div class="intraline-truefalse-row form-group form-row">
+                        <div class="col-5 intraline-truefalse-center">
+                            Scientific Purposes
+                        </div>
+
+                        <div class="col-7 intraline-truefalse-center">
+                            <div id="scientificPhotoUsage" class="btn-group" data-toggle="buttons">
+                                <label class="btn btn-secondary" >
+                                    <input type="radio" name="scientificPhotoUsage" value="true" autocomplete="off" >I agree
+                                </label>
+                                <label class="btn btn-secondary">
+                                    <input type="radio" name="scientificPhotoUsage" value="false" autocomplete="off">I disagree
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="intraline-truefalse-row form-group form-row">
+                        <div class="col-5 intraline-truefalse-center">
+                            Media Purposes
+                        </div>
+
+                        <div class="col-7 intraline-truefalse-center">
+                            <div id="mediaPhotoUsage" class="btn-group" data-toggle="buttons">
+                                <label class="btn btn-secondary" >
+                                    <input type="radio" name="mediaPhotoUsage" value="true" autocomplete="off" >I agree
+                                </label>
+                                <label class="btn btn-secondary">
+                                    <input type="radio" name="mediaPhotoUsage" value="false" autocomplete="off">I disagree
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="row intraline-section-buttons">
+                <div class="col-2 intraline-section-back">back</div>
+                <div class="col-8"> </div>
+                <div class="col-2 intraline-section-next">next</div>
+            </div>
+        </div>
+
+        <div class="container intraline-content-consentform intraline-content" data-section="7">
+
+            <div class="row">
+                <form id="intraline-patient-consent" class="col-sm-12">
+                    <div class="text-center intraline-form-sectionheadings">Section 4: Final Step</div>
+
+                    <div class="form-group intraline-form-text">
+                        Please ask your treating practitoner for a copy of the Intraline package insert.
+                    </div>
+
+                    <div class="form-group intraline-form-text">
+                        I confirm that my treating practitioner has:
+                    </div>
+
+                    <div class="intraline-truefalse-row form-group form-row">
+                        <div class="col-8 intraline-truefalse-center">
+                            Provided me with sufficient information about the treatment detailed overleaf in order to make
+                            an informed decision
+                        </div>
+
+                        <div class="col-4 intraline-truefalse-center">
+                            <div class="btn-group-vertical" data-toggle="buttons">
+                                <label class="btn btn-secondary" >
+                                    <input type="radio" name="options" autocomplete="off" >I agree
+                                </label>
+                                <label class="btn btn-secondary">
+                                    <input type="radio" name="options" autocomplete="off">I disagree
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="intraline-truefalse-row form-group form-row">
+                        <div class="col-8 intraline-truefalse-center">
+                            Given me the opportunity to ask all remaining questions I may have about the treatment,
+                            and has answered them to the best of their ability
+                        </div>
+
+                        <div class="col-4 intraline-truefalse-center">
+                            <div class="btn-group-vertical" data-toggle="buttons">
+                                <label class="btn btn-secondary" >
+                                    <input type="radio" name="options" autocomplete="off" >I agree
+                                </label>
+                                <label class="btn btn-secondary">
+                                    <input type="radio" name="options" autocomplete="off">I disagree
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="intraline-truefalse-row form-group form-row">
+                        <div class="col-8 intraline-truefalse-center">
+                            Given me the time to consider the treatment detailed overleaf
+                        </div>
+
+                        <div class="col-4 intraline-truefalse-center">
+                            <div class="btn-group-vertical" data-toggle="buttons">
+                                <label class="btn btn-secondary" >
+                                    <input type="radio" name="options" autocomplete="off" >I agree
+                                </label>
+                                <label class="btn btn-secondary">
+                                    <input type="radio" name="options" autocomplete="off">I disagree
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="intraline-truefalse-row form-group form-row">
+                        <div class="col-8 intraline-truefalse-center">
+                            Received the relevant medical history information from me to the best of my knowledge
+                        </div>
+
+                        <div class="col-4 intraline-truefalse-center">
+                            <div class="btn-group-vertical" data-toggle="buttons">
+                                <label class="btn btn-secondary" >
+                                    <input type="radio" name="options" autocomplete="off" >I agree
+                                </label>
+                                <label class="btn btn-secondary">
+                                    <input type="radio" name="options" autocomplete="off">I disagree
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group intraline-form-text">
+                        I therefore consent to receiving the described treatment by my treating practitioner.
+                    </div>
+
+                    <div class="form-group">
+                        <div class="form-group form-row">
+                            <div class="col-6">
+                                <input type="text" class="form-control">
+                            </div>
+                            <div class="col-6">
+                                <input type="date" class="form-control">
+                            </div>
+                            <div class="col-6">
+                                <small class="form-text text-center text-muted">Signature</small>
+                            </div>
+                            <div class="col-6">
+                                <small class="form-text text-center text-muted">Date</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <button id="intraline-consentform-submit" class="btn btn-secondary btn-block intraline-section-next" type="button">Finish</button>
+                        <input type="text" class="form-control">
+                    </div>
+                </form>
+            </div>
+
+            <div class="row intraline-section-buttons">
+                <div class="col-2 intraline-section-back">back</div>
+                <div class="col-8"> </div>
+                <div class="col-2 intraline-section-next"> </div>
+            </div>
+        </div>
+
+        <div class="container intraline-content-consentform intraline-content" data-section="8">
+            <div class="row">
+                <form class="col-sm-12">
+                    <div class="text-center intraline-form-sectionheadings">Thank you!</div>
+                    <div class="form-group intraline-form-text">
+                        At this point, please notify your practitoner that you've finished this form.
+                    </div>
+
+                    <div class="card form-group">
+                      <img class="card-img-top" src="img/onepercent.png" alt="1% For the Planet">
+                      <div class="card-body">
+                        <h4 class="card-title">Intraline is a Proud Member</h4>
+                        <p class="card-text">of 1% For the Planet, a group that donates 1% of yearly sales to environmental causes.</p>
+                      </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="row intraline-section-buttons">
+                <div class="col-2 intraline-section-back"> </div>
+                <div class="col-8"> </div>
+                <div class="col-2 intraline-section-formexit">exit</div>
+            </div>
+
+        </div>
+
+
+        <div class="container intraline-footer">
+            <div class="row intraline-addvert">
+                <div class="col-sm-2"></div>
+                <div class="text-center col-sm-8">
+                    <img class="img-fluid" src="img/add.png" alt="Addvert">
+                </div>
+                <div class="col-sm-2"></div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="leaveClientAreaModal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Leaving Client Area</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <p class="form-text">You've selected to leave the client area. Please enter the password below and press submit to continue</p>
+                        </div>
+                        <div class="form-group">
+                            <input id="leaveClientAreaPasswordInput" type="password" class="form-control">
+                            <small class="form-text text-center text-muted">Password</small>
+                        </div>
+                        <div class="form-group">
+                            <button id="leaveClientAreaPasswordSubmit" type="button" class="btn btn-block btn-secondary">submit</button>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Dismis</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/jquery-3.2.1.js"></script>
+        <script type="text/javascript" src="js/popper.js"></script>
+        <script type="text/javascript" src="js/bootstrap.js"></script>
+        <script type="text/javascript" src="js/util.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript" src="js/form.js"></script>
+        <script type="text/javascript" src="js/treatment.js"></script>
+        <script type="text/javascript" src="js/patient.js"></script>
+    </body>
+</html>

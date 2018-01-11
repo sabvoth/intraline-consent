@@ -1,0 +1,11 @@
+{
+    "id" : 0,
+    "fname" : "none",
+    "lname" : "none",
+    "createdate" : 0,
+    "dateofbirth" : "19, 1995",
+    "address" : "123 Street, City, Country",
+    "email" : "email@email.com",
+    "emailconsent" : false,
+    "tel" : "123-456-7891"
+}
