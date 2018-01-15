@@ -12,8 +12,8 @@ function Patient(){
     this.tel = "";
 
 
-
-    this.createPatient = function createPatient(formData){
+    //Provided with form data object and object[] for treatments
+    this.createPatient = function createPatient(formData, treatments){
         this.fname = formData.fname;
         this.lname = formData.lname;
         this.id = "";
@@ -25,12 +25,13 @@ function Patient(){
         if(formData.tel) this.tel = formData.tel;
         // I feel dirty now...
 
-        this.constructPatient(1);
+        this.constructPatient(0, treatments);
     }
 
-    this.constructPatient = function constructPatient(id){
+    this.constructPatient = function constructPatient(id, treatments){
         this.id = id;
         var patientTemplate = getPatientTemplate();
+        for()
         patientTemplate.fname = this.fname;
         patientTemplate.lname = this.lname;
         patientTemplate.dateofbirth = this.dateofbirth;
@@ -38,29 +39,42 @@ function Patient(){
         patientTemplate.email = this.email;
         patientTemplate.emailconsent = this.emailconsent;
         patientTemplate.tel = this.tel;
-        console.log(this);
-
 
         patientTemplate.id = id;
         patientTemplate.createDate = returnStandardDate(new Date());
         //should validate
         var folderName = this.lname + "-" + this.fname + "-" + id;
-        window.resolveLocalFileSystemURL(cordova.file.dataDirectory + "/Archive", function(dataDic){
-            dataDic.getDirectory(folderName, { create: true, exclusive: true },
-                function(dirEntry){
-                    dirEntry.getFile("data.json", {create:true}, function(file) {
-                        file.createWriter(function (fileWriter){
-                            fileWriter.write(JSON.stringify(patientTemplate));
-                            console.log("done creating patient: " + this.id);
-                        });
-                    });
-                },
-                function(e){
-                    console.log(e);
-                    if(e.code == 12) constructPatient(id + 1); //Recursion bbby
+        var self = this;
+        //on initial run, do things differently
+        if(id== 0){
+            verifyAndCreateFolder(this.lname + "-" + this.fname + "-1", function(result){
+                if(result){
+                    self.constructPatient(1, treatments);
                 }
-            );
-        });
+            })
+        }
+        if(id != 0){
+            window.resolveLocalFileSystemURL(cordova.file.dataDirectory + "/Archive", function(dataDic){
+                dataDic.getDirectory(folderName, { create: true, exclusive:true},
+                    function(dirEntry){
+                        dirEntry.getFile("data.json", {create:true}, function(file) {
+                            file.createWriter(function (fileWriter){
+                                fileWriter.write(JSON.stringify(patientTemplate));
+                                console.log("done creating patient: " + self.id);
+                                verifyAndCreateFolder(folderName, function(result){
+                                    if(result) {
+                                        for(x in treatments) self.addTreatment(treatments[x]);
+                                    }
+                                });
+                            });
+                        });
+                    },
+                    function(e){
+                        if(e.code == 12) self.constructPatient(id + 1, treatments); //Recursion bbby
+                    }
+                );
+            });
+        }
     }
 
     this.findPatient = function findPatient(callback, fname, lname, id){
@@ -68,7 +82,7 @@ function Patient(){
         this.fname = fname;
         this.lname = lname;
         this.id = id;
-
+        var self = this;
         window.resolveLocalFileSystemURL(cordova.file.dataDirectory + "/Archive/" + this.getFolderName(), function(dirEntry){
             dirEntry.getFile("data.json", {create:false}, function(file) {
                 file.file(function(fileData){
@@ -78,12 +92,12 @@ function Patient(){
                         //call a function from here.
                         returnData = JSON.parse(this.result);
 
-                        this.dateofbirth = returnData.dateofbirth;
-                        this.address = returnData.address;
-                        this.email = returnData.email;
-                        this.emailconsent = returnData.emailconsent;
-                        this.tel = returnData.tel;
-                        callback(returnData);
+                        self.dateofbirth = returnData.dateofbirth;
+                        self.address = returnData.address;
+                        self.email = returnData.email;
+                        self.emailconsent = returnData.emailconsent;
+                        self.tel = returnData.tel;
+                        callback(self);
                     };
                     reader.readAsText(fileData);
                 });
@@ -164,7 +178,7 @@ function Patient(){
                     file.file(function(fileData){
                         var reader = new FileReader();
                         reader.onloadend = function() {
-                            console.log("Successful file read: " + this);
+                            console.log("Successful file read: " + this.result);
                             displayPatient(JSON.parse(this.result));
                         };
                         reader.readAsText(fileData);

@@ -78,7 +78,7 @@ body {
 }
 
 .intraline-content-show{
-    
+
 }
 
 /** Section for the consent form styling **/
@@ -92,7 +92,7 @@ body {
     font-size:1.2em;
 }
 .intraline-section-buttons {
-    padding:2vh 0vw;
+    padding:10vh 0vw 3vh 0vw;
 }
 .intraline-content-consentform .card {
     border-radius:unset;

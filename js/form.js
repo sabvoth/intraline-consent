@@ -38,11 +38,21 @@ function checkClientAreaPassword(){
                                 // the defaults for direction, duration, etc are all fine
                                 "href" : "index.html",
                                 "direction" : "right",
-                                "duration" : 800
+                                "duration" : 500,
+                                "slowdownfactor" : 6
                             });
                     }
                 }
                 else $("#leaveClientAreaModal").modal("show");
+            }
+            else {
+                window.plugins.nativepagetransitions.slide({
+                    // the defaults for direction, duration, etc are all fine
+                    "href" : "index.html",
+                    "direction" : "right",
+                    "duration" : 500,
+                    "slowdownfactor" : 6
+                });
             }
         }
     });
@@ -137,8 +147,10 @@ function handleFormSubmit(){
 
     var patient = new Patient();
 
-    patient.createPatient(patientData);
-    patient.addTreatment(results);
+    patient.createPatient(patientData, function(){
+        patient.addTreatment(results);
+
+    });
 
 }
 

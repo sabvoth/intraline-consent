@@ -26,7 +26,6 @@ var app = {
             window.MobileAccessibility.usePreferredTextZoom(false);
         }
 
-
     },
 
     // deviceready Event Handler
@@ -38,8 +37,6 @@ var app = {
         if(window.MobileAccessibility){
             window.MobileAccessibility.usePreferredTextZoom(false);
         }
-        console.log("validation:" + validateAppFiles());
-
     },
 
     // Update DOM on a Received Event
@@ -49,7 +46,6 @@ var app = {
 };
 
 app.initialize();
-
 
 
 function handleBackButton() {

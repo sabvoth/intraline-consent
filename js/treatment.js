@@ -69,12 +69,13 @@ function Treatment(){
         template.scientificPhotoUsage = formData.scientificPhotoUsage;
         template.mediaPhotoUsage = formData.mediaPhotoUsage;
         template.questions = formData.questions;
-
+        console.log(template);
         //should validate
         this.treatmentFolder = returnStandardDate(new Date());
         //Requires Forms to be created before creating the treatment folder
         window.resolveLocalFileSystemURL(cordova.file.dataDirectory + "/Archive/" + patientFolder + "/Forms", function(dataDic){
             dataDic.getDirectory(this.treatmentFolder, { create: true }, function(dirEntry){
+                console.log(dirEntry);
                 dirEntry.getFile("treatment.json", {create:true}, function(file) {
                     file.createWriter(function (fileWriter){
                         fileWriter.write(JSON.stringify(template));
