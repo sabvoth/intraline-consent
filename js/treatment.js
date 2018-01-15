@@ -5,8 +5,6 @@ function Treatment(){
     this.patientFolder = "";
     this.treatmentFolder = "";
 
-
-
     this.createTreatment = function createTreatment(patientFolder, formData){
         console.log("creating treatment");
 

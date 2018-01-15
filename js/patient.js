@@ -2,43 +2,22 @@
 
 function Patient(){
 
-    this.fname = "";
-    this.lname = "";
-    this.id = "";
-    this.dateofbirth = "";
-    this.address = "";
-    this.email = "";
-    this.emailconsent = false
-    this.tel = "";
-
-
     //Provided with form data object and object[] for treatments
     this.createPatient = function createPatient(formData, treatments){
-        this.fname = formData.fname;
-        this.lname = formData.lname;
-        this.id = "";
-
-        if(formData.dateofbirth) this.dateofbirth = formData.dateofbirth;
-        if(formData.address) this.address = formData.address;
-        if(formData.email) this.email = formData.email;
-        this.emailconsent = formData.emailconsent;
-        if(formData.tel) this.tel = formData.tel;
-        // I feel dirty now...
+        for(var x in formData){
+            this[x] = formData[x];
+        }
 
         this.constructPatient(0, treatments);
+
     }
 
     this.constructPatient = function constructPatient(id, treatments){
         this.id = id;
         var patientTemplate = getPatientTemplate();
-        for()
-        patientTemplate.fname = this.fname;
-        patientTemplate.lname = this.lname;
-        patientTemplate.dateofbirth = this.dateofbirth;
-        patientTemplate.address = this.address;
-        patientTemplate.email = this.email;
-        patientTemplate.emailconsent = this.emailconsent;
-        patientTemplate.tel = this.tel;
+        for(var x in patientTemplate){
+            patientTemplate[x] = this[x]; //Transfer all of self's properties to the template
+        }
 
         patientTemplate.id = id;
         patientTemplate.createDate = returnStandardDate(new Date());
@@ -46,7 +25,7 @@ function Patient(){
         var folderName = this.lname + "-" + this.fname + "-" + id;
         var self = this;
         //on initial run, do things differently
-        if(id== 0){
+        if(id == 0){
             verifyAndCreateFolder(this.lname + "-" + this.fname + "-1", function(result){
                 if(result){
                     self.constructPatient(1, treatments);
@@ -82,6 +61,7 @@ function Patient(){
         this.fname = fname;
         this.lname = lname;
         this.id = id;
+
         var self = this;
         window.resolveLocalFileSystemURL(cordova.file.dataDirectory + "/Archive/" + this.getFolderName(), function(dirEntry){
             dirEntry.getFile("data.json", {create:false}, function(file) {
@@ -91,12 +71,10 @@ function Patient(){
                         console.log("Successful patient file read: " + this.result);
                         //call a function from here.
                         returnData = JSON.parse(this.result);
+                        for(var x in returnData){
+                            self[x] = returnData[x];
+                        }
 
-                        self.dateofbirth = returnData.dateofbirth;
-                        self.address = returnData.address;
-                        self.email = returnData.email;
-                        self.emailconsent = returnData.emailconsent;
-                        self.tel = returnData.tel;
                         callback(self);
                     };
                     reader.readAsText(fileData);
@@ -136,14 +114,9 @@ function Patient(){
         console.log("writing json over in folderName" + folderName);
 
         var patientTemplate = getPatientTemplate();
-        patientTemplate.fname = this.fname;
-        patientTemplate.lname = this.lname;
-        patientTemplate.dateofbirth = this.dateofbirth;
-        patientTemplate.address = this.address;
-        patientTemplate.email = this.email;
-        patientTemplate.emailconsent = this.emailconsent;
-        patientTemplate.tel = this.tel;
-
+        for(var x in patientTemplate){
+            patientTemplate[x] = this[x]; //Transfer all of self's properties to the template
+        }
 
         window.resolveLocalFileSystemURL(cordova.file.dataDirectory + "/Archive", function(dataDic){
             dataDic.getDirectory(folderName, { create: false }, function(dirEntry){
