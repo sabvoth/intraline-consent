@@ -168,7 +168,7 @@ function displayPatientTreatments(folderName){
     },
     function onErr(e){
             if(e.code == 1){
-                verifyAndCreateFolder("/Archive/" + folderName + "/Forms/", function(res){if(res) displayPatientTreatments(folderName)});
+                verifyAndCreateFolder("/Archive/" + folderName, "Forms", function(res){if(res) displayPatientTreatments(folderName)});
             }
         }
     );

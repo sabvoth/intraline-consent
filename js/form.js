@@ -110,7 +110,7 @@ function handleFormSubmit(){
     // In here, make a json file and save it in the appropriate folder
     // then also make PDF :(
 
-    var results = {
+    var treatmentResults = {
         "speakToMedia" : $("#speakToMedia input[type='radio']:checked").val(),
         "scientificPhotoUsage" : $("#scientificPhotoUsage input[type='radio']:checked").val(),
         "mediaPhotoUsage" : $("#mediaPhotoUsage input[type='radio']:checked").val(),
@@ -131,7 +131,7 @@ function handleFormSubmit(){
             "question" : $(this).find(".intraline-truefalse-question").text(),
             "val" : tempRes
         };
-        if(tempRes) results.questions.push(answerObject);
+        if(tempRes) treatmentResults.questions.push(answerObject);
     });
     var emailconsent = "" + $("#intraline-form-basicinfo input[name='emailconsent']:checked").val();
     //should validate
@@ -146,11 +146,7 @@ function handleFormSubmit(){
     }
 
     var patient = new Patient();
-
-    patient.createPatient(patientData, function(){
-        patient.addTreatment(results);
-
-    });
+    patient.createPatient(patientData, [treatmentResults]);
 
 }
 

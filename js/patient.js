@@ -26,9 +26,13 @@ function Patient(){
         var self = this;
         //on initial run, do things differently
         if(id == 0){
-            verifyAndCreateFolder(this.lname + "-" + this.fname + "-1", function(result){
-                if(result){
-                    self.constructPatient(1, treatments);
+            verifyAndFixFolders(function(res){
+                if(res){
+                    verifyAndCreateFolder("/Archive", this.lname + "-" + this.fname + "-1", function(innerRes){
+                        if(innerRes){
+                            self.constructPatient(1, treatments);
+                        }
+                    })
                 }
             })
         }
@@ -40,8 +44,9 @@ function Patient(){
                             file.createWriter(function (fileWriter){
                                 fileWriter.write(JSON.stringify(patientTemplate));
                                 console.log("done creating patient: " + self.id);
-                                verifyAndCreateFolder(folderName, function(result){
+                                verifyAndCreateFolder("/Archive", folderName, function(result){
                                     if(result) {
+                                        console.log("creating treatments");
                                         for(x in treatments) self.addTreatment(treatments[x]);
                                     }
                                 });
@@ -103,7 +108,7 @@ function Patient(){
     this.addTreatment = function addTreatment(treatmentData){
 
         var treatment = new Treatment();
-        var folderName = this.fname + "-" + this.lname + "-" + this.id;
+        var folderName = this.lname + "-" + this.fname + "-" + this.id;
         treatment.createTreatment(folderName, treatmentData);
 
     }

@@ -66,7 +66,7 @@ function checkLogin(){
 
 
 function returnStandardDate(srcDate){
-    var res = "" + srcDate.getDate() + "-" + (srcDate.getMonth() + 1) + "-" + srcDate.getFullYear() + "_" + srcDate.getHours() + ":" + srcDate.getMinutes();
+    var res = "" + srcDate.getDate() + "-" + (srcDate.getMonth() + 1) + "-" + srcDate.getFullYear() + "_" + srcDate.getHours() + "-" + srcDate.getMinutes();
     return res;
 }
 
@@ -133,7 +133,7 @@ function getSettings(callback, checkExists){
     var returnData = "";
 
     if(checkExists){
-        verifyAndCreateFolder("config")
+        verifyAndCreateFolder("", "config", function(res){if(res) getSettings(callback, false);});
     }
 
     //should validate
@@ -183,21 +183,29 @@ function createSettings(callback){
 }
 
 
-function verifyAndCreateFolder(folderName, callback){
+function verifyAndCreateFolder(containingURL, folderName, callback){
     var res = false;
 
-    window.resolveLocalFileSystemURL(cordova.file.dataDirectory, function(dataDic){
+    window.resolveLocalFileSystemURL(cordova.file.dataDirectory + containingURL, function(dataDic){
         dataDic.getDirectory(folderName, { create: true, exclusive:true}, function(dirEntry){
                 res = true;
                 console.log("created directory" + folderName);
                 callback(res);
             },
             function(e){
-                if(e.code == 12) res = true;
-                console.log("found directory" + folderName + " with res " + res);
-                callback(res);
-            }
-        );
+                if(e.code == 12) {
+                    res = true;
+                    console.log("found directory" + folderName);
+                    callback(res);
+                }
+            });
+    },
+    function(e){
+        if(e.code == 1) {
+            console.log("couldn't find containingURL " + containingURL);
+            res = false;
+            callback(res);
+        }
     });
 }
 
@@ -206,9 +214,9 @@ function verifyAndFixFolders(callback){
 
     var res = false;
 
-    verifyAndCreateFolder("config", function(result){
+    verifyAndCreateFolder("", "config", function(result){
         res = result;
-        verifyAndCreateFolder("Archive", function(innerResult){
+        verifyAndCreateFolder("", "Archive", function(innerResult){
             res = innerResult;
             callback(res);
         });
