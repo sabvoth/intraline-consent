@@ -40,29 +40,15 @@ function changePhase(href){
 
 }
 
-
-function validateAppFiles(){
-
-    window.resolveLocalFileSystemURL(cordova.file.dataDirectory, function(dataDic){
-        dataDic.getDirectory("Config", { create: true }, function(dirEntry){
-            dirEntry.getFile("settings.json", {create:false}, function(){
-                //success, settings exists
-            },
-            function(){
-                createSettingsFromTemplate();
-                //settings does not exist
-            });
-        });
-    });
-}
-
 function changePage(href){
     window.plugins.nativepagetransitions.slide({
         // the defaults for direction, duration, etc are all fine
-        "href" : href
+        "href" : href,
+        "direction" : "left",
+        "duration" : 500,
+        "slowdownfactor" : 6
     });
 }
-
 
 function checkLogin(){
 
@@ -71,8 +57,6 @@ function checkLogin(){
 
     if(storage.getItem("logIn") == "true" && Date.now() - 1800000 <= parseInt(storage.getItem("logInTime"))) {
         returnData = true;
-        console.log("hotdog");
-
     }
     else if(storage.getItem("logIn") == "true" && Date.now() - 1800000 > parseInt(storage.getItem("logInTime"))) {
         storage.setItem("logIn", "false") // Set to logged in
@@ -81,19 +65,13 @@ function checkLogin(){
 }
 
 
-
-
 function returnStandardDate(srcDate){
-    var res = "" + srcDate.getDate() + "-" + (srcDate.getMonth() + 1) + "-" + srcDate.getFullYear() + "_" + srcDate.getHours() + ":" + srcDate.getMinutes();
-    console.log("formatted " + srcDate + " to be " + res);
+    var res = "" + srcDate.getDate() + "-" + (srcDate.getMonth() + 1) + "-" + srcDate.getFullYear() + "_" + srcDate.getHours() + "-" + srcDate.getMinutes();
     return res;
-
 }
 
 
 // Section for "Settings.json" manipulation
-
-
 function getSettingsTemplate(){
     var returnData;
     $.ajaxSetup({ async: false});
@@ -112,7 +90,7 @@ function createSettingsFromTemplate(){
     var settings = getSettingsTemplate();
     //could update the settings right aways, but default is fine.
 
-    window.resolveLocalFileSystemURL(cordova.file.dataDirectory + "/Config", function(dirEntry){
+    window.resolveLocalFileSystemURL(cordova.file.dataDirectory + "/config", function(dirEntry){
             dirEntry.getFile("settings.json", {create:true, exclusive: true}, function(file) {
                 file.createWriter(function (fileWriter){
                     fileWriter.write(JSON.stringify(settings));
@@ -151,11 +129,15 @@ function displaySettings(settingsJSON, callback){
 
 // Gets the phones setting page and returns it as JSON object
 // *** ASYNC
-function getSettings(callback){
+function getSettings(callback, checkExists){
     var returnData = "";
 
+    if(checkExists){
+        verifyAndCreateFolder("", "config", function(res){if(res) getSettings(callback, false);});
+    }
+
     //should validate
-    window.resolveLocalFileSystemURL(cordova.file.dataDirectory + "/Config", function(dirEntry){
+    window.resolveLocalFileSystemURL(cordova.file.dataDirectory + "/config", function(dirEntry){
         dirEntry.getFile("settings.json", {create:false}, function(file) {
             file.file(function(fileData){
                 var reader = new FileReader();
@@ -167,6 +149,76 @@ function getSettings(callback){
                 };
                 reader.readAsText(fileData);
             });
+        },
+        function onError(e){
+            createSettings(function(res){
+                if(res) getSettings(callback, false);
+                else console.log("code err");
+            }); // does js let be so abusive?
+        });
+    });
+}
+
+function createSettings(callback){
+
+    var settings = getSettingsTemplate();
+    //could update the settings right aways, but default is fine.
+    var res = false;
+    window.resolveLocalFileSystemURL(cordova.file.dataDirectory + "/config", function(dirEntry){
+            dirEntry.getFile("settings.json", {create:true, exclusive: true}, function(file) {
+                file.createWriter(function (fileWriter){
+                    fileWriter.write(JSON.stringify(settings));
+                    res = true;
+                    callback(res);
+
+                });
+            },
+            function onError(e){
+                if(e.code == 12){
+                    res = true;
+                    callback(res);
+                }
+            });
+    });
+}
+
+
+function verifyAndCreateFolder(containingURL, folderName, callback){
+    var res = false;
+
+    window.resolveLocalFileSystemURL(cordova.file.dataDirectory + containingURL, function(dataDic){
+        dataDic.getDirectory(folderName, { create: true, exclusive:true}, function(dirEntry){
+                res = true;
+                console.log("created directory" + folderName);
+                callback(res);
+            },
+            function(e){
+                if(e.code == 12) {
+                    res = true;
+                    console.log("found directory" + folderName);
+                    callback(res);
+                }
+            });
+    },
+    function(e){
+        if(e.code == 1) {
+            console.log("couldn't find containingURL " + containingURL);
+            res = false;
+            callback(res);
+        }
+    });
+}
+
+
+function verifyAndFixFolders(callback){
+
+    var res = false;
+
+    verifyAndCreateFolder("", "config", function(result){
+        res = result;
+        verifyAndCreateFolder("", "Archive", function(innerResult){
+            res = innerResult;
+            callback(res);
         });
     });
 }
@@ -174,7 +226,7 @@ function getSettings(callback){
 
 function writeJSONtoSettings(settingsJSON){
 
-    window.resolveLocalFileSystemURL(cordova.file.dataDirectory + "/Config", function(dataDic){
+    window.resolveLocalFileSystemURL(cordova.file.dataDirectory + "/config", function(dataDic){
         dataDic.getFile("settings.json", {create:false}, function(file) {
             //Open the file
             file.createWriter(function (fileWriter){
@@ -190,7 +242,7 @@ function updateSetting(settingName, val){
     var returnData = "";
     console.log("updating setting " + settingName + " to " + val);
     //should validate
-    window.resolveLocalFileSystemURL(cordova.file.dataDirectory + "/Config", function(dataDic){
+    window.resolveLocalFileSystemURL(cordova.file.dataDirectory + "/config", function(dataDic){
             dataDic.getFile("settings.json", {create:false}, function(file) {
                 //Open the file
                 file.file(function(fileData){

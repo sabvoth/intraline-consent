@@ -38,11 +38,21 @@ function checkClientAreaPassword(){
                                 // the defaults for direction, duration, etc are all fine
                                 "href" : "index.html",
                                 "direction" : "right",
-                                "duration" : 800
+                                "duration" : 500,
+                                "slowdownfactor" : 6
                             });
                     }
                 }
                 else $("#leaveClientAreaModal").modal("show");
+            }
+            else {
+                window.plugins.nativepagetransitions.slide({
+                    // the defaults for direction, duration, etc are all fine
+                    "href" : "index.html",
+                    "direction" : "right",
+                    "duration" : 500,
+                    "slowdownfactor" : 6
+                });
             }
         }
     });
@@ -100,7 +110,7 @@ function handleFormSubmit(){
     // In here, make a json file and save it in the appropriate folder
     // then also make PDF :(
 
-    var results = {
+    var treatmentResults = {
         "speakToMedia" : $("#speakToMedia input[type='radio']:checked").val(),
         "scientificPhotoUsage" : $("#scientificPhotoUsage input[type='radio']:checked").val(),
         "mediaPhotoUsage" : $("#mediaPhotoUsage input[type='radio']:checked").val(),
@@ -121,7 +131,7 @@ function handleFormSubmit(){
             "question" : $(this).find(".intraline-truefalse-question").text(),
             "val" : tempRes
         };
-        if(tempRes) results.questions.push(answerObject);
+        if(tempRes) treatmentResults.questions.push(answerObject);
     });
     var emailconsent = "" + $("#intraline-form-basicinfo input[name='emailconsent']:checked").val();
     //should validate
@@ -136,9 +146,7 @@ function handleFormSubmit(){
     }
 
     var patient = new Patient();
-
-    patient.createPatient(patientData);
-    patient.addTreatment(results);
+    patient.createPatient(patientData, [treatmentResults]);
 
 }
 

@@ -1,19 +1,16 @@
 
 $(window).ready(function(){
-
-    //validateAppFiles();
-
     if(checkLogin()){
         changePhase("intraline-content-main");
         $(".intraline-footer").delay(200).fadeIn();
     }
     else{
         changePhase("intraline-content-login");
+        login(); //This handles first time sessions, since we don't care about proper login for now
     }
 
     $('.intraline-checkbox-enablesettings input[type=checkbox]').change(function() {
         if (this.checked) {
-            console.log($(this).parent().siblings("input[type=text]"));
             $(this).parent().siblings("input[type=text]").prop("readonly", false);
             $(this).parent().siblings("input[type=text]").prop("required", true);
 
@@ -22,22 +19,6 @@ $(window).ready(function(){
             $(this).parent().siblings("input[type=text]").prop("required", false);
         }
     });
-});
-
-$(".intraline-signin-option").on("click", function(){
-    switch($(this).data("option")){
-        case "gg":
-            login();
-            break;
-        case "fb":
-            login();
-            break;
-        case "ms":
-            login();
-            break;
-        default:
-            break;
-    }
 });
 
 $(".intraline-hyperlink").on("click", function(){
@@ -79,19 +60,16 @@ $("#intraline-settings input[type='text']").on("change", function(){
 })
 
 $("#enablePassword").change(function(){
-    if (this.checked) {
-
-    } else {
+    if (!this.checked) {
         $(this).parent().siblings("input[type=text]").prop("readonly", true);
     }
 });
 
+//Additional login features can be implemented from here
 function login(){
-    //do login stuff here lol
 
     var storage = window.localStorage;
     storage.setItem("logIn", "true") // Set to logged in
-    storage.setItem("username", $("#intraline-login-username").val()) // Set username
     storage.setItem("logInTime", Date.now()) // Set timestamp
 
     changePhase("intraline-content-main");
@@ -102,20 +80,24 @@ function login(){
 $("#intraline-patient-editform-submit").on("click", function(){
     // handle updating the client
     // also validate
-
+    console.log("updating patient");
     var name = $("#intraline-patient-editform-submit").data("name").split('-');
     var patient = new Patient();
-    patient.findPatient(function(){console.log("done patient submit");}, name[1], name[0], name[2]);
+    patient.findPatient(function(resultPatient){
+        console.log($("#intraline-patient-editform input"));
 
-
-    $("#intraline-patient-editform input").filter( function(index){  return $(this).data("valueChanged") == true }).each(function(index){
-        if(patient[$(this).attr("name")].length > 0) patient[$(this).attr("name")] = $(this).val();
-    });
-    patient.writeToFile(function(){
-        $("#intraline-archive-patient").fadeOut(400, function(){
-            $("#intraline-archive-folders").delay(200).fadeIn(1000);
+        $("#intraline-patient-editform input").filter( function(index){  return $(this).data("valueChanged") == true }).each(function(index){
+            console.log($(this));
+            if(patient[$(this).attr("name")].length > 0) patient[$(this).attr("name")] = $(this).val();
         });
-    });
+
+        patient.writeToFile(function(){
+            $("#intraline-archive-patient").fadeOut(400, function(){
+                $("#intraline-archive-folders").delay(200).fadeIn(1000);
+            });
+        });
+    }, name[1], name[0], name[2]);
+
 });
 
 $("#intraline-archive-patient input").on("change", function(){
@@ -123,7 +105,6 @@ $("#intraline-archive-patient input").on("change", function(){
 });
 
 function displayArchive(){
-
     window.resolveLocalFileSystemURL(cordova.file.dataDirectory + "/Archive",
       function (fileSystem) {
         var reader = fileSystem.createReader();
@@ -146,42 +127,51 @@ function displayArchive(){
           }
         );
       }, function (e) {
-        //write to log
+        verifyAndFixFolders(function(){console.log("done")});
       }
     );
 }
-
 
 
 function displayPatient(patient){
     console.log(patient);
 
     if(patient.id){
-        $("#intraline-patient-editform input[name='fname']").val(patient.fname);
-        $("#intraline-patient-editform input[name='lname']").val(patient.lname);
-        $("#intraline-patient-editform input[name='dob']").val(patient.dateofbirth);
-        $("#intraline-patient-editform input[name='address']").val(patient.address);
-        $("#intraline-patient-editform input[name='email']").val(patient.email);
-        $("#intraline-patient-editform input[name='tel']").val(patient.tel);
+        for(var x in patient){
+            $("#intraline-patient-editform input[name='" + x + "']").val(patient[x]);
+        }
         $("#intraline-patient-editform-submit").data("name", patient.lname + "-" + patient.fname + "-" + patient.id);
         $("#intraline-archive-patient").delay(200).fadeIn(1000);
-
-        $("#intraline-patient-editform-treatments li:not(.text-center)").remove();
-        /*
-        for(var x in patient.treatments){
-            if(patient.treatments[x].complete){
-                $("#intraline-patient-editform-treatments").append("<li class='list-group-item'>"+ patient.treatments[x].date +"</>");
-            }
-            else {
-                $("#intraline-patient-editform-treatments").append("<li class='list-group-item list-group-item-warning'>"+ patient.treatments[x].date +"</>");
-            }
-        }
-        */
+        console.log("finished displaying patient");
+        displayPatientTreatments(patient.lname + "-" + patient.fname + "-" + patient.id);
 
     }
     else{
-        //Uh oh. shouldn't do this ever.
+        console.log("Misconfigured patient file >:(");
     }
+}
+function displayPatientTreatments(folderName){
+
+    window.resolveLocalFileSystemURL(cordova.file.dataDirectory + "/Archive/" + folderName + "/Forms/",
+      function (fileSystem) {
+        var reader = fileSystem.createReader();
+        reader.readEntries(
+          function (entries) {
+              for(x in entries) {
+                  if(entries[x].isDirectory){
+                      $("#intraline-patient-editform-treatments").append("<li class='list-group-item'>"+ entries[x].name + "</>");
+                  }
+              }
+            console.log(entries);
+          }
+        );
+    },
+    function onErr(e){
+            if(e.code == 1){
+                verifyAndCreateFolder("/Archive/" + folderName, "Forms", function(res){if(res) displayPatientTreatments(folderName)});
+            }
+        }
+    );
 }
 
 //Provide the folder name of the patient to display
@@ -197,14 +187,10 @@ function triggerDisplayPatient(folderName){
 
 }
 
-
 function hidePatient(){
     $("#intraline-archive-patient").fadeOut(600);
     $("#intraline-archive-folders").delay(200).fadeIn(1000);
-
 }
-
-
 
 function createTestPDF(name){
     createClient("Cheryl", "McCarter", 2);

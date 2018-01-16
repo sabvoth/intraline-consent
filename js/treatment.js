@@ -5,13 +5,11 @@ function Treatment(){
     this.patientFolder = "";
     this.treatmentFolder = "";
 
-
-
     this.createTreatment = function createTreatment(patientFolder, formData){
         console.log("creating treatment");
 
         this.patientFolder = patientFolder;
-        createTreatmentFile(patientFolder, function(res){
+        this.createTreatmentFile(patientFolder, formData, function(res){
             console.log(res);
         });
     }
@@ -55,7 +53,8 @@ function Treatment(){
         //doesn't do anyhhing right now
     }
 
-    function createTreatmentFile(patientFolder, formData, callback){
+    this.createTreatmentFile = function createTreatmentFile(patientFolder, formData, callback){
+        console.log("creating template file");
 
         var returnData;
         $.ajaxSetup({ async: false});
@@ -69,12 +68,14 @@ function Treatment(){
         template.scientificPhotoUsage = formData.scientificPhotoUsage;
         template.mediaPhotoUsage = formData.mediaPhotoUsage;
         template.questions = formData.questions;
-
+        console.log(template);
         //should validate
         this.treatmentFolder = returnStandardDate(new Date());
+        console.log(this.treatmentFolder);
         //Requires Forms to be created before creating the treatment folder
         window.resolveLocalFileSystemURL(cordova.file.dataDirectory + "/Archive/" + patientFolder + "/Forms", function(dataDic){
             dataDic.getDirectory(this.treatmentFolder, { create: true }, function(dirEntry){
+                console.log(dirEntry);
                 dirEntry.getFile("treatment.json", {create:true}, function(file) {
                     file.createWriter(function (fileWriter){
                         fileWriter.write(JSON.stringify(template));
@@ -82,8 +83,20 @@ function Treatment(){
                         callback(true);
                     });
                 });
+            },
+            function(e){
+                console.log(e);
             });
-        });
+        },
+        function onErr(e){
+                if(e.code == 1){
+                    verifyAndCreateFolder("/Archive/" + patientFolder, "Forms", function(res){if(res) createTreatmentFile(patientFolder, formData, callback)});
+                }
+                else{
+                    console.log(e);
+                }
+            }
+        );
 
         $.ajaxSetup({ async: true});
     }
